@@ -1,0 +1,205 @@
+/* animations/styles.css - アニメーション用スタイル */
+
+/* オーバーレイコンテナ */
+#hack-animation-overlay {
+  background: rgba(0, 0, 0, 0.9);
+  font-family: 'Courier New', monospace;
+}
+
+/* ターミナル */
+.hack-terminal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 800px;
+  background: rgba(0, 0, 0, 0.95);
+  border: 2px solid #0F0;
+  padding: 20px;
+  color: #0F0;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  overflow-y: auto;
+  max-height: 80vh;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5),
+              inset 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.terminal-line {
+  margin: 5px 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* カーソル点滅 */
+@keyframes blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+/* グリッチエフェクト */
+.glitch-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.glitch-1 {
+  animation: glitch-anim-1 0.3s ease-in-out;
+}
+
+.glitch-2 {
+  animation: glitch-anim-2 0.2s ease-in-out;
+}
+
+.glitch-3 {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 0, 0.1) 0px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+/* グリッチアニメーション1: クリップパスとトランスフォーム */
+@keyframes glitch-anim-1 {
+  0% {
+    clip-path: inset(40% 0 61% 0);
+    transform: translate(0);
+  }
+  20% {
+    clip-path: inset(92% 0 1% 0);
+    transform: translate(-5px, 2px);
+  }
+  40% {
+    clip-path: inset(43% 0 1% 0);
+    transform: translate(5px, -2px);
+  }
+  60% {
+    clip-path: inset(25% 0 58% 0);
+    transform: translate(-3px, -3px);
+  }
+  80% {
+    clip-path: inset(54% 0 7% 0);
+    transform: translate(3px, 3px);
+  }
+  100% {
+    clip-path: inset(58% 0 43% 0);
+    transform: translate(0);
+  }
+}
+
+/* グリッチアニメーション2: 透明度変化 */
+@keyframes glitch-anim-2 {
+  0% {
+    opacity: 1;
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    opacity: 0.8;
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    opacity: 0.9;
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    opacity: 0.7;
+    filter: hue-rotate(270deg);
+  }
+  100% {
+    opacity: 1;
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* スキャンライン */
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  animation: scanline-move 8s linear infinite;
+}
+
+@keyframes scanline-move {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+/* RGB分離エフェクト */
+.rgb-shift {
+  animation: rgb-shift-anim 0.2s ease-in-out;
+}
+
+@keyframes rgb-shift-anim {
+  0% {
+    text-shadow: 0 0 0 rgba(255, 0, 0, 0);
+  }
+  25% {
+    text-shadow: 3px 0 0 rgba(255, 0, 0, 0.7),
+                 -3px 0 0 rgba(0, 255, 0, 0.7),
+                 0 3px 0 rgba(0, 0, 255, 0.7);
+  }
+  50% {
+    text-shadow: -3px 0 0 rgba(255, 0, 0, 0.7),
+                 3px 0 0 rgba(0, 255, 0, 0.7),
+                 0 -3px 0 rgba(0, 0, 255, 0.7);
+  }
+  75% {
+    text-shadow: 3px 0 0 rgba(255, 0, 0, 0.7),
+                 -3px 0 0 rgba(0, 255, 0, 0.7),
+                 0 3px 0 rgba(0, 0, 255, 0.7);
+  }
+  100% {
+    text-shadow: 0 0 0 rgba(255, 0, 0, 0);
+  }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .hack-terminal {
+    width: 90%;
+    font-size: 12px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hack-terminal {
+    width: 95%;
+    font-size: 10px;
+    padding: 10px;
+  }
+}
+
+/* アクセシビリティ: アニメーション無効化設定への対応 */
+@media (prefers-reduced-motion: reduce) {
+  .glitch-1,
+  .glitch-2,
+  .scanline,
+  .rgb-shift {
+    animation: none;
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Hacking Animation Screen",
+  "version": "1.0.0",
+  "description": "画面にハッキング風のアニメーションを表示する拡張機能",
+  "permissions": ["activeTab", "storage", "scripting"],
+  "action": {
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "48": "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options/options.html"
+}
