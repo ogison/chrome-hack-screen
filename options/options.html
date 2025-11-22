@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacking Animation Screen - 設定</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚡ Hacking Animation Screen</h1>
+      <p class="subtitle">設定</p>
+    </header>
+
+    <main>
+      <section class="settings-section">
+        <h2>アニメーション設定</h2>
+
+        <div class="setting-item">
+          <label for="duration">アニメーション継続時間</label>
+          <div class="input-group">
+            <input type="range" id="duration" min="5" max="60" step="5" value="10">
+            <span id="duration-value">10</span> 秒
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <label for="style">アニメーションスタイル</label>
+          <select id="style">
+            <option value="mix">ミックス（全て）</option>
+            <option value="matrix">マトリックス風</option>
+            <option value="terminal">ターミナル風</option>
+            <option value="glitch">グリッチ風</option>
+          </select>
+        </div>
+
+        <div class="setting-item">
+          <label for="colorScheme">カラースキーム</label>
+          <select id="colorScheme">
+            <option value="green">緑（デフォルト）</option>
+            <option value="red">赤</option>
+            <option value="blue">青</option>
+            <option value="custom">カスタム（開発予定）</option>
+          </select>
+        </div>
+
+        <div class="setting-item">
+          <label>
+            <input type="checkbox" id="soundEnabled">
+            サウンドエフェクトを有効にする（開発予定）
+          </label>
+        </div>
+      </section>
+
+      <section class="info-section">
+        <h2>使い方</h2>
+        <ul>
+          <li>拡張機能アイコンをクリックするとアニメーションが開始されます</li>
+          <li><kbd>ESC</kbd> キーまたは画面クリックでアニメーションを終了できます</li>
+          <li><kbd>Space</kbd> キーで一時停止/再開（開発予定）</li>
+        </ul>
+      </section>
+
+      <section class="info-section">
+        <h2>注意事項</h2>
+        <ul>
+          <li>一部の保護されたページ（chrome://など）では動作しません</li>
+          <li>アニメーションは視覚効果のみで、実際にページを改変することはありません</li>
+          <li>光過敏性発作をお持ちの方は使用をお控えください</li>
+        </ul>
+      </section>
+
+      <div class="button-group">
+        <button id="save" class="btn btn-primary">設定を保存</button>
+        <button id="reset" class="btn btn-secondary">デフォルトに戻す</button>
+      </div>
+
+      <div id="status" class="status"></div>
+    </main>
+
+    <footer>
+      <p>Version 1.0.0</p>
+    </footer>
+  </div>
+
+  <script src="../utils/storage.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
