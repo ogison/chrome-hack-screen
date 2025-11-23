@@ -1,0 +1,27 @@
+{
+  "name": "chrome-hack-screen",
+  "version": "1.0.0",
+  "description": "Chrome extension that displays hacking-style animations on screen",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "validate": "node scripts/validate-manifest.js",
+    "package": "node scripts/package.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ogison/chrome-hack-screen.git"
+  },
+  "keywords": [
+    "chrome-extension",
+    "animation",
+    "hacking",
+    "matrix"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "archiver": "^7.0.1"
+  }
+}
