@@ -1,6 +1,8 @@
 // content.js - アニメーションコントローラー
 // すべてのアニメーション効果を統合し、管理する
 
+/* global SettingsManager, MatrixEffect, TerminalEffect, GlitchEffect */
+
 class HackingAnimation {
   constructor() {
     this.container = null;

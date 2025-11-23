@@ -1,0 +1,81 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-and-release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate manifest
+        run: npm run validate
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Create package
+        run: npm run package
+
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Read manifest version
+        id: manifest_version
+        run: echo "VERSION=$(node -p "require('./manifest.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Check version match
+        run: |
+          if [ "${{ steps.get_version.outputs.VERSION }}" != "${{ steps.manifest_version.outputs.VERSION }}" ]; then
+            echo "❌ Tag version (${{ steps.get_version.outputs.VERSION }}) does not match manifest version (${{ steps.manifest_version.outputs.VERSION }})"
+            exit 1
+          fi
+          echo "✅ Version check passed: ${{ steps.manifest_version.outputs.VERSION }}"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*.zip
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+          body: |
+            ## Chrome Extension Release v${{ steps.manifest_version.outputs.VERSION }}
+
+            ### Installation
+            1. Download the `.zip` file below
+            2. Extract the zip file
+            3. Open Chrome and navigate to `chrome://extensions/`
+            4. Enable "Developer mode"
+            5. Click "Load unpacked" and select the extracted folder
+
+            ### What's Changed
+            See the full changelog below.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: chrome-extension-v${{ steps.manifest_version.outputs.VERSION }}
+          path: dist/*.zip
+          retention-days: 90

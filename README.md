@@ -1,5 +1,8 @@
 # Hacking Animation Screen - Chrome拡張機能
 
+[![CI](https://github.com/ogison/chrome-hack-screen/actions/workflows/ci.yml/badge.svg)](https://github.com/ogison/chrome-hack-screen/actions/workflows/ci.yml)
+[![Release](https://github.com/ogison/chrome-hack-screen/actions/workflows/release.yml/badge.svg)](https://github.com/ogison/chrome-hack-screen/actions/workflows/release.yml)
+
 画面にハッキング風のクールなアニメーションを表示するChrome拡張機能です。
 
 ## 概要

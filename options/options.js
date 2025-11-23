@@ -1,5 +1,7 @@
 // options/options.js - オプション画面のロジック
 
+/* global SettingsManager */
+
 document.addEventListener('DOMContentLoaded', async () => {
   // DOM要素の取得
   const durationInput = document.getElementById('duration');
