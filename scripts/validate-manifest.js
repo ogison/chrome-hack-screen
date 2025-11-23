@@ -34,7 +34,7 @@ try {
   // Check icon files exist
   if (manifest.action && manifest.action.default_icon) {
     const icons = manifest.action.default_icon;
-    for (const [size, iconPath] of Object.entries(icons)) {
+    for (const [, iconPath] of Object.entries(icons)) {
       const fullPath = path.join(__dirname, '..', iconPath);
       if (!fs.existsSync(fullPath)) {
         errors.push(`Icon file not found: ${iconPath}`);

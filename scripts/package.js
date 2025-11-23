@@ -42,7 +42,8 @@ const filesToInclude = [
   'utils/**/*'
 ];
 
-// Files to exclude
+// Files to exclude (reserved for future use with glob filtering)
+// eslint-disable-next-line no-unused-vars
 const filesToExclude = [
   '**/*.md',
   '**/node_modules/**',
